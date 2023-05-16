@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block yield %}
+<div class="container">
+  <div class="card bg-dark text-white mt-5 mx-auto" style="max-width: 900px;max-height: 850px;">
+    <div class="card-body">
+      <h5 class="card-title text-white">Create Post</h5>
+      <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="text" class="form-label text-white">Text</label>
+          <textarea name="text" id="text" class="form-control bg-dark text-white" rows="6" placeholder="Enter your post text" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label text-white">Image</label>
+          <input type="file" name="image" id="image" class="form-control bg-dark text-white">
+        </div>
+        <div class="mb-3">
+          <label for="topic" class="form-label text-white">Topic</label>
+          <select name="topic" id="topic" class="form-select bg-dark text-white" required>
+            <option value="" disabled selected>Select a topic</option>
+            {% for topic in topics %}
+              <option value="{{ topic.id }}">{{ topic.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-dark btn-outline-light">Create</button>
+        <a href="{% url 'newsfeedpage'%}" class="btn btn-dark btn-outline-success">Back</a>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

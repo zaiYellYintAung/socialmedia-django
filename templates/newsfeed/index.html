@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block yield %}
+<p></p>
+	<div class="card bg-dark text-white">
+  <div class="card-body">
+    <h5 class="card-title">Create Post</h5>
+    <p class="card-text">Share your thoughts</p>
+    <a href="{% url 'createpage' %}" class="btn btn-primary">Go to Create Post</a>
+  </div>
+</div>
+{% for post in posts %}
+  <div class="card bg-dark text-white mt-3">
+    <a href="{% url 'detailpage' post.id %}" style="text-decoration: none; color: #fff;">
+    {% if post.image %}
+
+      <img src="{{post.image.url}}"  class="card-img-top">
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">{{ post.text }}</h5>
+      <p class="card-text">Topics:</p>
+      <div class="mb-3">
+        {% for topic in post.topic.all %}
+          <span class="badge bg-secondary">{{ topic.name }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    </a>
+  </div>
+{% empty %}
+  <p>No posts available.</p>
+{% endfor %}
+
+
+{% endblock %}

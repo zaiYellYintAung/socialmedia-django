@@ -113,3 +113,11 @@ def register(request):
 	}
 
 	return render(request,templates,data)
+
+def profile(request):
+	templates="home/profile.html"
+
+	data={
+
+	}
+	return render(request,templates,data)

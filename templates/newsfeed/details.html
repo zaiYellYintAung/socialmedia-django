@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block yield %}
+ <div class="container">
+    <div class="card bg-dark text-white mt-5">
+      <div class="card-body">
+        <h2 class="card-title">{{ post.title }}</h2>
+        <p class="card-text">{{ post.text }}</p>
+        <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="Post Image">
+
+        <h5 class="mb-3">Topic: {{ post.topic }}</h5>
+
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <h6 class="mb-3">Reacts:</h6>
+            {% for react in post.react_set.all %}
+              <p>{{ react.react }}</p>
+            {% empty %}
+              <p>No reacts yet.</p>
+            {% endfor %}
+            <p class="mb-3">Total Reacts: {{ post.react_set.count }}</p>
+          </div>
+          <div class="col-md-6">
+            <h6 class="mb-3">Comments:</h6>
+            <p>Total Comments: {{ post.comment_set.count }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card bg-dark text-white mt-5">
+      <div class="card-body">
+        <h5 class="mb-3">Add Comment:</h5>
+        <form method="post" action="">
+          {% csrf_token %}
+          <div class="form-group">
+            <textarea class="form-control" name="comment-text" rows="3" placeholder="Write your comment here"></textarea>
+          </div>
+          <p> </p>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <hr class="bg-white">
+
+        <h5 class="mb-3">Comments:</h5>
+        {% for comment in post.comment_set.all %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <p class="card-text">{{ comment.text }}</p>
+            </div>
+          </div>
+        {% empty %}
+          <p>No comments yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
