@@ -17,15 +17,21 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                    <a class="btn btn-danger mx-2" href="{% url 'signoutpage' %}">Sign Out</a>
+                </li>
+                {% else %}
+
                 <li class="nav-item">
                     <a class="btn btn-primary mx-2" href="{% url 'signinpage' %}">Sign In</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-success mx-2" href="{% url 'registerpage' %}">Sign Up</a>
                 </li>
-                <li class="nav-item">
-                    <a class="btn btn-danger mx-2" href="{% url 'signoutpage' %}">Sign Out</a>
-                </li>
+                {% endif %}
+                
+             
             </ul>
         </div>
     </div>

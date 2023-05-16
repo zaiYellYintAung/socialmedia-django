@@ -2,13 +2,17 @@
 {% extends 'layout.html' %}
 
 {% block yield %}
-	<div class="container">
-  <div class="card mt-5 mx-auto" style="max-width: 400px;">
+<div class="container">
+  <div class="card bg-dark text-white mt-5 mx-auto" style="max-width: 400px;">
     <div class="card-body">
-      <h5 class="card-title">Sign Out Confirmation</h5>
-      <p class="card-text">Are you sure you want to sign out?</p>
-      <button class="btn btn-danger">Sign Out</button>
+      <h5 class="card-title text-white">Logout</h5>
+      <p class="card-text text-white">Are you sure you want to log out?</p>
+      <form method="POST" action="">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-dark btn-outline-danger">Logout</button>
+      </form>
     </div>
   </div>
 </div>
+
 {% endblock %}

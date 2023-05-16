@@ -54,6 +54,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'socialmedia.urls'
+
+LOGOUT_REDIRECT_URL = 'homepage'
+
+
 import os
 
 TEMPLATES = [

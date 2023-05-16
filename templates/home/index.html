@@ -1,6 +1,107 @@
 {% extends 'layout.html' %}
 
+
+
 {% block yield %}
-	<h2>This is home page</h2>
-	
+
+
+{% if user.is_authenticated%}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body">
+          <h1 class="display-4">Welcome Back, {{ user.username }}!</h1>
+          <p class="lead">Connect with friends, share your moments, and discover new content.</p>
+        </div>
+      </div>
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body">
+          <h2 class="card-title">Recent Posts</h2>
+          <!-- Display recent posts by the user -->
+        </div>
+      </div>
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body">
+          <h2 class="card-title">Explore</h2>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-secondary">Discover new friends</li>
+            <li class="list-group-item list-group-item-secondary">Join groups and communities</li>
+            <li class="list-group-item list-group-item-secondary">Engage with trending topics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body">
+          <h2 class="card-title">Friend Requests</h2>
+          <!-- Display friend requests here -->
+        </div>
+      </div>
+      <div class="card bg-dark text-light">
+        <div class="card-body">
+          <h2 class="card-title">Featured Groups</h2>
+          <!-- Display featured groups here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% else %}
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body">
+          <h1 class="display-4">Welcome to My Social Media App</h1>
+          <p class="lead">Connect with friends and family, and share your favorite moments with the world!</p>
+          <a href="{% url 'registerpage' %}" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+      </div>
+<div class="card bg-dark text-light mb-4">
+  <div class="card-body">
+    <h2 class="card-title">Features</h2>
+    <ul class="list-group list-group-flush rounded">
+      <li class="list-group-item list-group-item-secondary">Connect with friends and family</li>
+      <li class="list-group-item list-group-item-secondary">Share your favorite moments</li>
+      <li class="list-group-item list-group-item-secondary">Discover new content</li>
+    </ul>
+  </div>
+</div>
+      <div class="card bg-dark text-light mb-4">
+  <div class="card-body">
+    <h2 class="card-title">Recommended Posts</h2>
+    <!-- Display recommended posts here -->
+  </div>
+</div>
+
+    </div>
+    <div class="col-lg-4">
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body">
+          <h2 class="card-title">Recent Posts</h2>
+          <!-- Display recent posts here -->
+        </div>
+      </div>
+      <div class="card bg-dark text-light">
+        <div class="card-body">
+          <h2 class="card-title">Featured Users</h2>
+          <!-- Display featured users here -->
+        </div>
+      </div>
+      <div class="card bg-dark text-light mb-4">
+  <div class="card-body">
+    <h2 class="card-title">Featured Groups</h2>
+    <!-- Display featured groups here -->
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+{% endif %}
+
 {% endblock %}

@@ -27,14 +27,54 @@ def about(request):
 def signin(request):
 	templates="home/signin.html"
 
+	if request.method=='POST':
+		username=request.POST['username']
+		password=request.POST['password']
+		user=authenticate(request,username=username,password=password)
+		if user is not None:
+			login(request,user)
+			messages.success(request,"Signed in")
+
+			return redirect('homepage')
+
+
+		else:
+			messages.success(request,"Error!!")
+			return redirect('signinpage')
+
+
 	data={
 		"title":"Sign in"
 	}
 
 	return render(request,templates,data)
 
+# def login_user(request):
+# 	data={}
+
+# 	if request.method == "POST":
+# 		username=request.POST['username']
+# 		password=request.POST['password']
+# 		user=authenticate(request, username=username, password=password)
+# 		if user is not None:
+# 			login(request,user)
+# 			return redirect('about')
+
+# 		else:
+# 			messages.success(request,("There is an error logging in "))
+# 			return redirect('loginpage')
+			
+
+# 	else:	
+# 		return render(request,"members/login.html",data)
+
+
 def signout(request):
 	templates="home/signout.html"
+	if request.method=="POST":
+		logout(request)
+		messages.success(request,"Successfully signed out")
+		return redirect('homepage')
 
 	data={
 		"title":"Sign out"
@@ -46,21 +86,30 @@ def signout(request):
 def register(request):
 	templates="home/register.html"
 
+	form=UserCreationForm()
+		# form.fields['username'].widget.attrs.update({'class': 'form-control'})
+	 	# form.fields['password1'].widget.attrs.update({'class': 'form-control'})
+	 	# form.fields['password2'].widget.attrs.update({'class': 'form-control'})
+
+
 	if request.method=="POST":
 		form=UserCreationForm(request.POST)
 		if form.is_valid():
 			form.save()
-			username=form.cleaned_data['username']
-			password=form.cleaned_data['password1']
-			user=authenticate(request,username=username,password=password)
-			signin(request,user)
+			# username=form.cleaned_data['username']
+			# password=form.cleaned_data['password1']
+			# user=authenticate(request,username=username,password=password)
+			# login(request,user)
 			messages.success(request,("Please login "))
-			return redirect('loginpage')
+			return redirect('signinpage')
 		else:
+			form=UserCreationForm()
 			messages.success(request,("Not okay"))
 			return redirect('registerpage')
+
 	data={
-		"title":"Register"
+		"title":"Register",
+		"form":form
 	}
 
 	return render(request,templates,data)
