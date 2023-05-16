@@ -11,7 +11,7 @@
     <div class="col-lg-8">
       <div class="card bg-dark text-light mb-4">
         <div class="card-body">
-          <h1 class="display-4">Welcome Back, {{ user.username }}!</h1>
+          <h1 class="display-4">Welcome Back, {{ user.username |title}}!</h1>
           <p class="lead">Connect with friends, share your moments, and discover new content.</p>
         </div>
       </div>
@@ -24,11 +24,7 @@
       <div class="card bg-dark text-light mb-4">
         <div class="card-body">
           <h2 class="card-title">Explore</h2>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item list-group-item-secondary">Discover new friends</li>
-            <li class="list-group-item list-group-item-secondary">Join groups and communities</li>
-            <li class="list-group-item list-group-item-secondary">Engage with trending topics</li>
-          </ul>
+         
         </div>
       </div>
     </div>
