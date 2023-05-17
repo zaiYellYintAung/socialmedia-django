@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block yield %}
 <p></p>
@@ -13,12 +14,13 @@
   <div class="card bg-dark text-white mt-3">
     <a href="{% url 'detailpage' post.id %}" style="text-decoration: none; color: #fff;">
     {% if post.image %}
-
-      <img src="{{post.image.url}}"  class="card-img-top">
+      <!-- <h1>{{post.image.url}}</h1> -->
+      <!-- <img src="{{ post.image.url }}"  class="card-img-top"/> -->
+      <img src="{{post.image.url}}" style="width: 200px;">
     {% endif %}
     <div class="card-body">
-      <h5 class="card-title">{{ post.text }}</h5>
-      <p class="card-text">Topics:</p>
+      <h5 class="card-title">{{ post.title |title}}</h5>
+      <p class="card-text">{{ post.text |truncatewords:40}}</p>
       <div class="mb-3">
         {% for topic in post.topic.all %}
           <span class="badge bg-secondary">{{ topic.name }}</span>

@@ -29,7 +29,7 @@ class Profile(models.Model):
 
 class Post(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    # title=models.CharField(max_length=100)
+    title=models.CharField(max_length=100)
     text = models.TextField()
     image = models.ImageField(null=True, blank=True)
     topic = models.ManyToManyField(Topic)

@@ -58,9 +58,6 @@ ROOT_URLCONF = 'socialmedia.urls'
 
 LOGOUT_REDIRECT_URL = 'homepage'
 
-MEDIA_URL ='/images/'
-MEDIA_ROOT=BASE_DIR / 'static/images'
-
 
 
 TEMPLATES = [
@@ -85,18 +82,25 @@ WSGI_APPLICATION = 'socialmedia.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         #'ENGINE': 'django.db.backends.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': '0vG5DGpl2GquR81RUYp5',
+#         'HOST': 'containers-us-west-67.railway.app',
+#         'PORT': '8046',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': '0vG5DGpl2GquR81RUYp5',
-        'HOST': 'containers-us-west-67.railway.app',
-        'PORT': '8046',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -131,6 +135,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+MEDIA_URL ='/images/'
+MEDIA_ROOT=BASE_DIR / 'static/images'
 
 STATIC_URL = 'static/'
 
