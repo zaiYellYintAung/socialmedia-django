@@ -4,6 +4,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 
+from .forms import SignUpForm
 
 # Create your views here.
 def index(request):
@@ -86,14 +87,14 @@ def signout(request):
 def register(request):
 	templates="home/register.html"
 
-	form=UserCreationForm()
+	form=SignUpForm()
 		# form.fields['username'].widget.attrs.update({'class': 'form-control'})
 	 	# form.fields['password1'].widget.attrs.update({'class': 'form-control'})
 	 	# form.fields['password2'].widget.attrs.update({'class': 'form-control'})
 
 
 	if request.method=="POST":
-		form=UserCreationForm(request.POST)
+		form=SignUpForm(request.POST)
 		if form.is_valid():
 			form.save()
 			# username=form.cleaned_data['username']
@@ -103,7 +104,7 @@ def register(request):
 			messages.success(request,("Please login "))
 			return redirect('signinpage')
 		else:
-			form=UserCreationForm()
+			form=SignUpForm()
 			messages.success(request,("Not okay"))
 			return redirect('registerpage')
 
