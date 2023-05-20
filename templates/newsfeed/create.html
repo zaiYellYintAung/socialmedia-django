@@ -8,14 +8,12 @@
       <form method="POST" action="" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
-          <label for="text" class="form-label text-white">Title</label>
-          <div class="form-control bg-dark text-white"  placeholder="Enter your post text" required>
-              {{form.title}}
-          </div>
+          <label for="title" class="form-label text-white">Title</label>
+          <input type="text" name="title" id="title" class="form-control bg-dark text-white" placeholder="Enter your post title" required>
         </div>
         <div class="mb-3">
           <label for="text" class="form-label text-white">Text</label>
-          <textarea name="text" id="text" class="form-control bg-dark text-white" rows="6" placeholder="Enter your post text" required>{{form.text}}</textarea>
+          <textarea name="text" id="text" class="form-control bg-dark text-white" rows="6" placeholder="Enter your post text" required></textarea>
         </div>
         <div class="mb-3">
           <label for="image" class="form-label text-white">Image</label>
@@ -31,13 +29,11 @@
           </select>
         </div>
         <button type="submit" class="btn btn-dark btn-outline-light">Create</button>
-        <a href="{% url 'newsfeedpage'%}" class="btn btn-dark btn-outline-success">Back</a>
-
+        <a href="{% url 'newsfeedpage' %}" class="btn btn-dark btn-outline-success">Back</a>
       </form>
     </div>
   </div>
 </div>
-
 
 
 {% endblock %}

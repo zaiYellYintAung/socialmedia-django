@@ -3,7 +3,7 @@
 
 {% block yield %}
 <p></p>
-	<div class="card bg-dark text-white">
+<div class="card bg-dark text-white">
   <div class="card-body">
     <h5 class="card-title">Create Post</h5>
     <p class="card-text">Share your thoughts</p>
@@ -11,28 +11,24 @@
   </div>
 </div>
 {% for post in posts %}
-  <div class="card bg-dark text-white mt-3">
-    <a href="{% url 'detailpage' post.id %}" style="text-decoration: none; color: #fff;">
-    
+<div class="card bg-dark text-white mt-3">
+  <a href="{% url 'detailpage' post.id %}" style="text-decoration: none; color: #fff;">
     <div class="card-body">
-      <h5 class="card-title">{{ post.title |title}}</h5>
-      <p class="card-text">{{ post.text |truncatewords:40}}</p>
+      <h5 class="card-title">{{ post.title|title }}</h5>
+      <p class="card-text">{{ post.text|truncatewords:40 }}</p>
       {% if post.user %}
-        <p>Posted by <span class="">@{{post.user.username|title}}</span></p>  
+      <p>Posted by <span class="">@{{ post.user.username|title }}</span></p>
       {% endif %}
       <div class="mb-3">
         {% for topic in post.topic.all %}
-          <span class="badge bg-secondary">{{ topic.name }}</span>
+        <span class="badge bg-secondary">{{ topic.name }}</span>
         {% endfor %}
-        
       </div>
-
     </div>
-    </a>
-  </div>
+  </a>
+</div>
 {% empty %}
-  <p>No posts available.</p>
+<p>No posts available.</p>
 {% endfor %}
-
 
 {% endblock %}
