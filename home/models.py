@@ -31,9 +31,9 @@ class Friendship(models.Model):
 
 
 class Follower(models.Model):
-    follower = models.ForeignKey(Profile, related_name='following', on_delete=models.CASCADE)
-    following = models.ForeignKey(Profile, related_name='followers', on_delete=models.CASCADE)
+    follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
+    following = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.follower.user.username} is following {self.following.user.username}'
+        return f'{self.follower.username} is following {self.following.username}'

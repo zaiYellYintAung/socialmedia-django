@@ -132,10 +132,86 @@ def register(request):
 @login_required(login_url="{% url 'signinpage'%}")
 def profile(request,pk):
 	profile=Profile.objects.get(uid=pk)
+	toggle_follow_setting=request.user==profile.user
+
+	follower=request.user
+	following=User.objects.get(id=pk)
+	li=Follower.objects.all()
+
+	def checking(following,follower):
+		if follower!=following:
+			for obj in li:
+				messages.success(request,f"follower {obj.follower.username},following {obj.following.username}")
+				if follower==obj.follower and following==obj.following:
+					messages.success(request,"Not Followed")
+					return True
+				else:
+					messages.success(request,"Followed")
+					
+					return False
+
+		elif follower==following:
+			messages.success(request,"User")
+
+
+	followed=checking(following,follower) 
 
 	templates="home/profile.html"
 
 	data={
-		"profile":profile
+		"profile":profile,
+		"toggle_follow_setting":toggle_follow_setting,
+		"followed":followed
+
+	}
+	return render(request,templates,data)
+
+
+
+@login_required(login_url="{% url 'signinpage'%}")
+def follow(request,pk):
+	follower=request.user
+	following=User.objects.get(id=pk)
+
+	follow_list=Follower.objects.all()
+	for obj in follow_list:
+		if obj.follower != follower and obj.following != following:
+			flw=Follower(follower=follower,following=following)
+			flw.save()
+			messages.success(request,f"Followed {following.username}")
+			return redirect(f'profile/{following.username}')
+		else:
+			messages.success("??")
+			return redirect(f'profile/{following.username}')
+
+	return redirect(f'homepage')
+
+@login_required(login_url="{% url 'signinpage'%}")
+def unfollow(request,pk):
+	follower=request.user
+	following=User.objects.get(id=pk)
+
+	follow_list=Follower.objects.all()
+	for obj in follow_list:
+		if obj.follower != follower and obj.following != following:
+			flw=Follower(follower=follower,following=following)
+			flw.save()
+			messages.success(request,f"Followed {following.username}")
+			return redirect(f'profile/{following.username}')
+		else:
+			messages.success("??")
+			return redirect(f'profile/{following.username}')
+
+	return redirect(f'homepage')
+
+
+@login_required(login_url="{% url 'signinpage'%}")
+def setting(request,pk):
+
+
+	templates="home/setting.html"
+
+	data={
+
 	}
 	return render(request,templates,data)

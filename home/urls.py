@@ -10,5 +10,11 @@ urlpatterns=[
 	path("signin/",views.signin,name="signinpage"),
 	path("signout/",views.signout,name="signoutpage"),
 	path("register/",views.register,name="registerpage"),
+	path("follow/<int:pk>",views.follow,name="followpage"),
+	path("unfollow/<int:pk>",views.unfollow,name="unfollowpage"),
+
+	path("setting/<int:pk>",views.setting,name="settingpage"),
+
+
 
 ]
