@@ -4,20 +4,37 @@
 <div class="container">
   <div class="card bg-dark text-white mt-5 mx-auto" style="max-width: 600px;">
     <div class="row g-0">
+      {% if profile.profile_photo %}
       <div class="col-md-4 d-flex align-items-center justify-content-center">
-        <img src="https://randomuser.me/api/portraits/men/1.jpg" class="img-fluid rounded-circle" alt="Profile Picture">
+        <img src="{{profile.profile_photo.url}}" class="img-fluid rounded-circle" alt="Profile Picture" style="max-width:115px">
       </div>
+      {% else %}
+    <div class="col-md-4 d-flex align-items-center justify-content-center">
+        <img src="https://www.rd.com/wp-content/uploads/2019/11/cat-10-e1573844975155-scaled.jpg" class="img-fluid rounded-circle" alt="Profile Picture" style="max-width:115px">
+      </div>
+      {% endif %}
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title text-white">Username</h5>
-          <p class="card-text">Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h5 class="card-title text-white">{{profile.user.username |title}}</h5>
+          {% if profile.bio %}
+          <p class="card-text">{{profile.bio}}</p>
+          {% else %}
+          <p class="card-text">This user hasn't written any bio yet</p>
+          {% endif %}
+
           <div class="row">
             <div class="col">
-              <p class="card-text">Followers: 100</p>
+              <p class="card-text">Followers: </p>
             </div>
             <div class="col">
-              <p class="card-text">Friends: 200</p>
+              <p class="card-text">Posts: </p>
             </div>
+              <div>
+                <br>
+           {% for hobby in profile.hobbies.all %}
+          <span class="badge bg-primary">{{ hobby.title }}</span>
+           {% endfor %}
+           </div>
           </div>
         </div>
       </div>

@@ -10,6 +10,8 @@ urlpatterns=[
 	path('detail/<int:pk>',views.detail,name="detailpage"),
 	path('edit/<int:pk>',views.edit,name="editpage"),
 	path('delete/<int:pk>',views.delete,name="deletepage"),
+	path('delete-comment/<int:pk>',views.delete_comment,name="deletecommentpage"),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

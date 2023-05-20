@@ -3,8 +3,12 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.decorators import login_required
+from .models import *
 from .forms import SignUpForm
+
+###get data from newsfeed
+
 
 # Create your views here.
 def index(request):
@@ -70,12 +74,19 @@ def signin(request):
 # 		return render(request,"members/login.html",data)
 
 
+
+
+@login_required(login_url="{% url 'signinpage'%}")
 def signout(request):
 	templates="home/signout.html"
 	if request.method=="POST":
 		logout(request)
 		messages.success(request,"Successfully signed out")
+
 		return redirect('homepage')
+
+
+
 
 	data={
 		"title":"Sign out"
@@ -86,28 +97,31 @@ def signout(request):
 
 def register(request):
 	templates="home/register.html"
-
-	form=SignUpForm()
-		# form.fields['username'].widget.attrs.update({'class': 'form-control'})
-	 	# form.fields['password1'].widget.attrs.update({'class': 'form-control'})
-	 	# form.fields['password2'].widget.attrs.update({'class': 'form-control'})
-
-
 	if request.method=="POST":
 		form=SignUpForm(request.POST)
+
 		if form.is_valid():
 			form.save()
-			# username=form.cleaned_data['username']
-			# password=form.cleaned_data['password1']
-			# user=authenticate(request,username=username,password=password)
-			# login(request,user)
-			messages.success(request,("Please login "))
-			return redirect('signinpage')
+			username=request.POST['username']
+			password=request.POST['password1']
+			user=authenticate(request,username=username,password=password)
+
+			if user is not None:
+				login(request,user)
+				new_profile=Profile(user=user,uid=user.id)
+				new_profile.save()
+				messages.success(request,("Please login "))
+				logout(request)
+
+				redirect('homepage')
+
 		else:
 			form=SignUpForm()
 			messages.success(request,("Not okay"))
 			return redirect('registerpage')
 
+	else:
+		form=SignUpForm()
 	data={
 		"title":"Register",
 		"form":form
@@ -115,10 +129,13 @@ def register(request):
 
 	return render(request,templates,data)
 
-def profile(request):
+@login_required(login_url="{% url 'signinpage'%}")
+def profile(request,pk):
+	profile=Profile.objects.get(uid=pk)
+
 	templates="home/profile.html"
 
 	data={
-
+		"profile":profile
 	}
 	return render(request,templates,data)

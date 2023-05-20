@@ -2,8 +2,11 @@ from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages
 from .forms import *
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
+@login_required(login_url="{% url 'signinpage'%}")
 def newsfeed(request):
 	template="newsfeed/index.html"
 	posts=Post.objects.all()
@@ -14,36 +17,47 @@ def newsfeed(request):
 
 	return render(request,template,data)
 
+@login_required(login_url="{% url 'signinpage'%}")
 def create(request):
-	template="newsfeed/create.html"
-	post_form=PostForm()
-	topic=Topic.objects.all()
-	if request.method=='POST':
+	template="newsfeed/create_demo.html"
+	if request.method =='POST':
 		form=PostForm(request.POST)
 		if form.is_valid():
-			form.save()
-			messages.success(request,"Post created!!")
+			post=form.save(commit=False)
+			post.user=request.user
+			post.save()
 			return redirect('newsfeedpage')
 		else:
-			messages.success(request,"Try again!")
-			return redirect('createpage')
+			messages.success(request,"Not valid")
+	else:
+		form=PostForm()
 
 	data={
-		"form":post_form,
-		"topics":topic,
+		'form':form
 	}
 
 	return render(request,template,data)
 
+@login_required(login_url="{% url 'signinpage'%}")
 def detail(request,pk):
 	template="newsfeed/details.html"
 	post=Post.objects.get(id=pk)
+	check=(request.user!=post.user)
+
+
+	if request.method=='POST':
+		comment=request.POST['comment-text']
+		new_comment=Comment(user=request.user,text=comment,post=post)
+		new_comment.save()
+
 	data={
-		'post':post
+		'post':post,
+		'check':check
 	}
 
 	return render(request,template,data)
 
+@login_required(login_url="{% url 'signinpage'%}")
 def edit(request,pk):
 	template="newsfeed/edit.html"
 	post=Post.objects.get(id=pk)
@@ -73,7 +87,7 @@ def edit(request,pk):
 # 			form.save()
 # 			return redirect('blogs')
 
-
+@login_required(login_url="{% url 'signinpage'%}")
 def delete(request,pk):
 	template="newsfeed/delete.html"
 	post=Post.objects.get(id=pk)
@@ -88,4 +102,23 @@ def delete(request,pk):
 	}
 
 	return render(request,template,data)
+
+
+@login_required(login_url="{% url 'signinpage'%}")
+def delete_comment(request,pk):
+	template="newsfeed/comment_delete.html"
+	comment=Comment.objects.get(id=pk)
+	comment_origin=comment.post.id
+	if request.method=='POST':
+		if request.user==comment.user:
+			comment.delete()
+			messages.success(request,"Comment Deleted!!")
+			return redirect(f'/newsfeed/detail/{comment_origin}')
+
+	data={
+
+	}
+
+	return render(request,template,data)
+
 

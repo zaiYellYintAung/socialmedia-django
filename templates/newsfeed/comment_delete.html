@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block yield %}
+<div class="container">
+  <div class="card bg-dark text-white mt-5 mx-auto" style="max-width: 400px;">
+    <div class="card-body">
+      <h5 class="card-title text-white">Confirm</h5>
+      <p class="card-text text-white">Are you sure you want to Delete Your comment?</p>
+      <form method="POST" action="">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-dark btn-outline-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

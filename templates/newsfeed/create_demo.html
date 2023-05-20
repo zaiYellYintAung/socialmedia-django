@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block yield %}
+
+<form action="" method="POST">
+        {% csrf_token %}
+
+{{form.as_p}}
+<input type="submit" class="btn btn-dark" name="Create">
+</form>
+
+
+    
+{% endblock %}
