@@ -3,16 +3,18 @@
 {% block yield %}
 
 {% if user.is_authenticated %}
-<div class="container mt-4">
+<div class="container" style="margin-top: 5rem;">
   <div class="row">
+
     <div class="col-lg-8">
-      <div class="card bg-dark text-light mb-4">
+      <div class="card mb-4 text-white" style="background-color: #FF5A5F;">
         <div class="card-body">
-          <h1 class="display-4">Welcome Back, {{ user.username|title }}!</h1>
+          <h1>Welcome Back, {{ user.username|title }}!</h1>
           <p class="lead">Connect with friends, share your moments, and discover new content.</p>
         </div>
       </div>
-      <div class="card bg-dark text-light mb-4">
+
+      <div class="card mb-4" style="border: 3px solid #FF5A5F; color: #FF5A5F;">
         <div class="card-body">
           <h2 class="card-title">Recent Posts</h2>
           <ul>
@@ -20,27 +22,31 @@
           </ul>
         </div>
       </div>
-      <div class="card bg-dark text-light mb-4">
+
+      <div class="card mb-4" style="border: 3px solid #FF5A5F; color: #FF5A5F;">
         <div class="card-body">
           <h2 class="card-title">Explore</h2>
           <!-- Display explore content here -->
         </div>
       </div>
     </div>
+
     <div class="col-lg-4">
-      <div class="card bg-dark text-light mb-4">
+      <div class="card mb-4 text-white" style="background-color: #FF5A5F;">
         <div class="card-body">
           <h2 class="card-title">Friend Requests</h2>
           <!-- Display friend requests here -->
         </div>
       </div>
-      <div class="card bg-dark text-light">
+
+      <div class="card text-white" style="background-color: #FF5A5F;">
         <div class="card-body">
           <h2 class="card-title">Featured Groups</h2>
           <!-- Display featured groups here -->
         </div>
       </div>
     </div>
+      
   </div>
 </div>
 
@@ -49,44 +55,52 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-lg-8">
-      <div class="card bg-dark text-light mb-4">
+
+      <div class="card text-white mb-4" style="background-color: #FF5A5F;">
         <div class="card-body">
-          <h1 class="display-4">Welcome to My Social Media App</h1>
+          <h1>Welcome to My Social Media App</h1>
           <p class="lead">Connect with friends and family, and share your favorite moments with the world!</p>
-          <a href="{% url 'registerpage' %}" class="btn btn-primary btn-lg">Get Started</a>
+          <a href="{% url 'registerpage' %}" class="btn btn-lg text-white" style="background-image: linear-gradient(90deg, #4458dc 0%, #854fee 100%);">
+            Get Started
+          </a>
         </div>
       </div>
-      <div class="card bg-dark text-light mb-4">
+
+      <div class="card mb-4" style="border:3px solid #FF5A5F;">
         <div class="card-body">
-          <h2 class="card-title">Features</h2>
+          <h2 class="card-title" style="color: #FF5A5F;">Features</h2>
           <ul class="list-group list-group-flush rounded">
-            <li class="list-group-item list-group-item-secondary">Connect with friends and family</li>
-            <li class="list-group-item list-group-item-secondary">Share your favorite moments</li>
-            <li class="list-group-item list-group-item-secondary">Discover new content</li>
+            <li class="list-group-item border-bottom-0" style="border: 1px solid #FF5A5F; color: #FF5A5F;">Connect with friends and family</li>
+            <li class="list-group-item border-bottom-0" style="border: 1px solid #FF5A5F; color: #FF5A5F;">Share your favorite moments</li>
+            <li class="list-group-item" style="border: 1px solid #FF5A5F; color: #FF5A5F;">Discover new content</li>
           </ul>
         </div>
       </div>
-      <div class="card bg-dark text-light mb-4">
+      
+      <div class="card mb-4" style="border: 3px solid #FF5A5F; color: #FF5A5F;">
         <div class="card-body">
           <h2 class="card-title">Recommended Posts</h2>
           <!-- Display recommended posts here -->
         </div>
       </div>
     </div>
+
     <div class="col-lg-4">
-      <div class="card bg-dark text-light mb-4">
+      <div class="card mb-4" style="border: 3px solid #FF5A5F; color: #FF5A5F;">
         <div class="card-body">
           <h2 class="card-title">Recent Posts</h2>
           <!-- Display recent posts here -->
         </div>
       </div>
-      <div class="card bg-dark text-light">
+
+      <div class="card mb-4" style="border: 3px solid #FF5A5F; color: #FF5A5F;">
         <div class="card-body">
           <h2 class="card-title">Featured Users</h2>
           <!-- Display featured users here -->
         </div>
       </div>
-      <div class="card bg-dark text-light mb-4">
+
+      <div class="card mb-4" style="border: 3px solid #FF5A5F; color: #FF5A5F;">
         <div class="card-body">
           <h2 class="card-title">Featured Groups</h2>
           <!-- Display featured groups here -->

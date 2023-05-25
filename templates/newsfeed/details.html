@@ -2,13 +2,13 @@
 
 {% block yield %}
 <div class="container">
-  <div class="card bg-dark text-white mt-5">
+  <div class="card mt-4" style="border: 3px solid #ff5a5f;">
     <div class="card-body">
       <h2 class="card-title">{{ post.title }}</h2>
       <p class="card-text">{{ post.text }}</p>
       {% if check %}
       {% else %}
-        <div class="col-md-6">
+        <div>
           <a href="{% url 'deletepage' post.id %}" class="btn btn-danger">Delete</a>
         </div>
 
@@ -27,7 +27,7 @@
           <span class="badge bg-secondary">{{ topic.name }}</span>
         {% endfor %}
       </div>
-      <div class="row mt-3">
+      <div class="row mt-3" style="color: #ff5a5f;">
         <div class="col-md-6">
           <p class="mb-3">Total Reacts: {{ post.react_set.count }}</p>
         </div>
@@ -39,27 +39,35 @@
     </div>
   </div>
 {% if check %}
-  <div class="card bg-dark text-white mt-5">
+  <div class="card mt-4" style="border: 3px solid #ff5a5f; color: #ff5a5f;">
     <div class="card-body">
       <h5 class="mb-3">Add Comment:</h5>
       <form method="post" action="">
         {% csrf_token %}
         <div class="form-group">
-          <textarea class="form-control" name="comment-text" id="comment-text" rows="3" placeholder="Write your comment here"></textarea>
+          <textarea class="form-control" style="border: 1px solid #ff5a5f;" name="comment-text" id="comment-text" rows="3" placeholder="Write your comment here"></textarea>
         </div>
-        <p> </p>
-        <button type="submit" class="btn btn-primary">Comment</button>
+    
+        <div class="mt-2 d-flex justify-content-end">
+          <button type="submit" class="btn text-white fs-5" style="background-color: #ff5a5f;">Comment</button>
+        </div>
       </form>
 
-      <hr class="bg-white">
+      <hr>
 
       <h5 class="mb-3">Comments:</h5>
       {% for comment in post.comment_set.all %}
         <div class="card mb-3">
-          <div class="card-body">
-            <a class="card-text" href="{% url 'profilepage' user.id %}">@{{ comment.user.username }}</a>
-            <p class="card-text">{{ comment.text }}</p>
-            <a class="btn small btn-danger" href="{% url 'deletecommentpage' comment.id %}">Delete</a>
+          <div class="card-body" style="background-color: rgba(209, 209, 209, 0.815);">
+            <a class="card-text" style="color: blueviolet;" href="{% url 'profilepage' user.id %}">@{{ comment.user.username }}</a>
+            <div class="d-flex justify-content-between">
+              <div class="w-75">
+                <p class="card-text">{{ comment.text }}</p>
+              </div>
+              <div class="w-25 d-flex justify-content-end">
+                <a class="btn btn-danger" style="width: 75px; height: 40px;" href="{% url 'deletecommentpage' comment.id %}">Delete</a>
+              </div>
+            </div>
           </div>
         </div>
       {% empty %}
@@ -70,7 +78,7 @@
 </div>
 
 {% else %}
-  <div class="card bg-dark text-primary mt-5">
+  <div class="card mt-5" style="border: 3px solid #ff5a5f;color: #ff5a5f;">
     <div class="card-body">
    
 
@@ -78,9 +86,9 @@
       <h5 class="mb-3">Comments:</h5>
       {% for comment in post.comment_set.all %}
         <div class="card mb-3">
-          <div class="card-body">
+          <div class="card-body" style="background-color: rgba(209, 209, 209, 0.815);">
 
-            <a class="card-text text-primary" href="{% url 'profilepage' comment.user.id %}" style="text-decoration:none; color:white;">@{{ comment.user.username }}</a>
+            <a class="card-text" href="{% url 'profilepage' comment.user.id %}" style="text-decoration:none; color:blueviolet;">@{{ comment.user.username }}</a>
             <p class="card-text">{{ comment.text }}</p>
  
   

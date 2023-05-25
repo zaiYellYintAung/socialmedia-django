@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Profile
+from .models import Profile,Follower
 from .forms import SignUpForm
 from newsfeed.models import Post
+from django.contrib.auth.models import User
+
 
 
 def index(request):
@@ -123,11 +125,13 @@ def setting(request):
         if "bio" in request.POST:
             profile.bio = request.POST["bio"]
 
-        if "hobby" in request.POST:
-            hobbies = request.POST.getlist("hobby")
-            profile.hobbies.set(hobbies)
+        # if "hobby" in request.POST:
+        #     hobbies = request.POST.getlist("hobby")
+        #     profile.hobbies.set(hobbies)
 
         profile.save()
+        return redirect('profilepage',request.user.id)
+
 
     data = {"profile": profile}
     return render(request, "home/setting.html", data)

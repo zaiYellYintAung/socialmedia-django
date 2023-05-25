@@ -6,47 +6,72 @@
     
 <div class="container">
 
-  <div class="card bg-dark text-white mt-5 mx-auto" style="max-width: 250px;max-height: 850px;">
+  <div class="card text-white mt-5 mx-auto" style="width: 600px; height: auto; background-color:#FF5A5F;;">
     <div class="card-body">
-      <h5 class="card-title text-white">Sign up</h5>
+      <h1 class="card-title text-white text-center fs-1 mb-5">Sign up</h1>
       <form method="POST" action="">
         {% csrf_token %}
 
-        <div class="mb-3">
-          <label for="username" class="form-label text-white">Firstname</label>
+        <div class="d-flex justify-content-around fs-5">
+          <div class="mb-3">
+            <label for="username" class="form-label text-white">Firstname</label>
+  
+            <div>
+              {{form.firstname}}
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="username" class="form-label text-white">Lastname</label>
 
-          {{form.firstname}}
-        </div>
-        <div class="mb-3">
-          <label for="username" class="form-label text-white">Lastname</label>
-          {{form.lastname}}
+            <div>
+              {{form.firstname}}
+            </div>
+          </div>
         </div>
         
-        <div class="mb-3">
-          <label for="password" class="form-label text-white">Username</label>
-          {{form.username}}
-        </div>
+        <div class="d-flex justify-content-around fs-5">
           <div class="mb-3">
-          <label for="password" class="form-label text-white">Email</label>
-          {{form.email}}
+            <label for="password" class="form-label text-white">Username</label>
+
+            <div>
+              {{form.username}}
+            </div>
+          </div>
+            <div class="mb-3">
+            <label for="password" class="form-label text-white">Email</label>
+
+            <div>
+              {{form.email}}
+            </div>
+          </div>
         </div>
+
+        <div class="d-flex justify-content-around fs-5">
           <div class="mb-3">
-          <label for="password" class="form-label text-white">Password</label>
-          {{form.password1}}
+            <label for="password" class="form-label text-white">Password</label>
+
+            <div>
+              {{form.password1}}
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label text-white">Confirm Password</label>
+
+            <div>
+              {{form.password2}}
+            </div>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label text-white">Confirm Password</label>
-          {{form.password2}}
+
+        <div class="d-flex justify-content-center mt-3">
+          <button type="submit" class="rounded-pill btn btn-dark fs-5" style="width: 150px;">
+            Sign Up
+          </button>
         </div>
-
-        <div class="mb-3">
-          <button type="submit" class="btn btn-dark btn-outline-light">Sign Up</button>
-        </div>
-
-
-         </div>
-
+  
+        <p class="my-4 fs-5">Terms and conditions;bla bla bla bla bla bla bla bla </p>
       </form>
+
     </div>
   </div>
 </div>
