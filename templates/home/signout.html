@@ -3,13 +3,13 @@
 
 {% block yield %}
 <div class="container">
-  <div class="card bg-dark text-white mt-5 mx-auto" style="max-width: 400px;">
-    <div class="card-body">
-      <h5 class="card-title text-white">Logout</h5>
-      <p class="card-text text-white">Are you sure you want to log out?</p>
-      <form method="POST" action="">
+  <div class="card mt-5 mx-auto" style="max-width: 400px; border-color:  #FF5A5F;">
+    <div class="card-body" >
+      <h1 class="card-title text-center" style="color: #FF5A5F;">Logout</h1>
+      <p class="card-text fs-5 text-center">Are you sure you want to logout?</p>
+      <form method="POST" action="" class="d-flex justify-content-center">
         {% csrf_token %}
-        <button type="submit" class="btn btn-dark btn-outline-danger">Logout</button>
+        <button type="submit" class="btn btn-danger fs-5" style="width: 120px;">Logout</button>
       </form>
     </div>
   </div>
